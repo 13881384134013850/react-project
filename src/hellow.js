@@ -5,7 +5,7 @@ import "./style.css"
 class Hellow extends React.Component {
     render() {
         return (
-            <h1>سلام دوستان</h1>
+            <h1 className='title'>{this.props.title}</h1>
         )
     }
 }

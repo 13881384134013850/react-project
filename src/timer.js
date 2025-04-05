@@ -8,49 +8,45 @@ class Timer extends React.Component {
     constructor() {
         super()
         this.state = {
-            hours: 1,
-            minutes: 0,
-            seconds: 3,
+            time: 10
         }
     }
 
-    timer() {
+    interval() {
         this.setState({
-            seconds: this.state.seconds - 1
+            time: this.state.time - 1
         })
-
-        if (this.state.seconds < 1 && this.state.minutes > 0) {
-            this.setState({
-                minutes: this.state.minutes - 1,
-                seconds: 60
-            })
-        }
-
-        if (this.state.seconds < 1 && this.state.minutes < 1 && this.state.hours > 0) {
-            this.setState({
-                hours: this.state.hours - 1,
-                minutes: 60
-            })
-        }
-
-        console.log(this.state.seconds)
-
-        if (this.state.seconds == 0 && this.state.minutes == 0 && this.state.hours == 0) {
-            clearInterval(intervalTimer)
-        }
     }
 
     componentDidMount() {
-        intervalTimer = setInterval(() => this.timer(), 1000)
+        intervalTimer = setInterval(() => this.interval(), 1000)
+    }
+
+    componentDidUpdate() {
+        if (this.state.time == 0) {
+            this.stop()
+        }
+    }
+
+    start() {
+        this.stop()
+        intervalTimer = setInterval(() => this.interval(), 1000)
+    }
+
+    stop() {
+        clearInterval(intervalTimer)
     }
 
     render() {
         return (
-            <h2 className='timer'>
-                hours : {this.state.hours} <br /><br />
-                minutes : {this.state.minutes} <br /><br />
-                seconds : {this.state.seconds} <br />
-            </h2>
+            <>
+                <h2 className='timer'>
+                    it is {this.state.time}
+                </h2>
+                <button onClick={() => this.start()}>start</button>
+                <button onClick={() => this.stop()}>stop</button>
+                <button onClick={this.props.handleChangeTitle}>change title</button>
+            </>
         )
     }
 }
