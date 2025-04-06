@@ -22,10 +22,37 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    box-shadow: 0 0 50px 10px #fff;
-    color: gold;
+    box-shadow: 0 0 50px #fff;
+    color: #fff;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.box_btn {
+    margin-top: 10px;
+}
+
+.btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    border: none;
+    margin-right: 10px;
+    font-family: serif;
+    cursor: pointer;
+}
+
+.btn-red {
+    background-color: red;
+}
+
+.btn-green {
+    background-color: green;
+}
+
+.btn-silver {
+    background-color: silver;
 }
