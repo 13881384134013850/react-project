@@ -32,6 +32,8 @@
 
 .box_btn {
     margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .btn {
@@ -43,6 +45,7 @@
     margin-right: 10px;
     font-family: serif;
     cursor: pointer;
+
 }
 
 .btn-red {
@@ -55,4 +58,9 @@
 
 .btn-silver {
     background-color: silver;
+}
+
+.main_item_list {
+    margin-top: 15px;
+    color: gold;
 }

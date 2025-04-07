@@ -1,47 +1,36 @@
-import React, { useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Hellow from './hellow';
 import Timer from './timer';
-
-// class App extends React.Component {
-//     constructor() {
-//         super()
-//         this.state = {
-//             title: 'به سایت کدیاد خوش امدید'
-//         }
-//     }
-
-//     handleChangeTitle = () => [
-//         this.setState({
-//             title: 'به سایت سبزلرن خوش امدید'
-//         })
-//     ]
-
-//     render() {
-//         return (
-//             <div className='main'>
-//                 <Hellow title={this.state.title} />
-//                 <Timer handleChangeTitle={this.handleChangeTitle} />
-//             </div>
-//         )
-//     }
-// }
-
-// هوک ها همان مواردی هستند که به ما کمک می کنند بجای استفاده از کلاس ها برای ساخت کامپوننت های ری اکتی از فانکشن ها استفاده می کنیم
+import TimeList from './TimeList';
 
 const App = () => {
     const [title, setTitle] = useState('به سایت کدیاد خوش امدید');
+    const [isLight, setIsLight] = useState(false);
+    const [timeArr, setTimeArr] = useState(["00 : 05 : 10", "05 : 07 : 13"])
 
-    const handleChangeTitle = () => {
-        setTitle('به سایت سبزلرن خوش امدید')
+    const handleSetIsLight = () => {
+        setIsLight(!isLight)
     }
 
+    useEffect(() => {
+        // console.log('useEffect')
+        return () => {
+        }
+    }, [isLight])
+    // زمانی که می خواهیم این موارد دوباره از سرگرفته بشه اسم استیت های خود را لیست می کنیم 
+
     return (
-        <div className="main">
+        <div className="main" style={{ backgroundColor: isLight ? 'white' : 'black' }}>
             <Hellow title={title} />
-            <Timer handleChangeTitle={handleChangeTitle} />
+            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} />
+            <TimeList>
+                {timeArr}
+            </TimeList>
         </div>
     )
 }
+
+// هوک ها همان مواردی هستند که به ما کمک می کنند بجای استفاده از کلاس ها برای ساخت کامپوننت های ری اکتی از فانکشن ها استفاده می کنیم
 
 export default App
