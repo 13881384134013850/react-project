@@ -15,6 +15,7 @@ class Timer extends React.Component {
     }
 
     startInterval = () => {
+        this.stopInterval()
         intervalTimer = setInterval(() => {
             this.setState({
                 seconds: this.state.seconds + 1
@@ -33,11 +34,21 @@ class Timer extends React.Component {
                     hours: this.state.hours + 1
                 })
             }
+
         }, 1000)
     }
 
     stopInterval = () => {
         clearInterval(intervalTimer)
+    }
+
+    resetInterval = () => {
+        this.stopInterval()
+        this.setState({
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        })
     }
 
     render() {
@@ -52,8 +63,9 @@ class Timer extends React.Component {
                 </h2>
                 <div className='box_btn'>
                     <button className='btn btn-green' onClick={this.startInterval}>start</button>
-                    <button className='btn btn-red'>stop</button>
-                    <button className='btn btn-silver'>reset</button>
+                    <button className='btn btn-red' onClick={this.stopInterval}>stop</button>
+                    <button className='btn btn-silver' onClick={this.resetInterval}>reset</button>
+                    <button className='btn btn-silver' onClick={this.props.handleChangeTitle}>set title</button>
                 </div>
             </>
         )
