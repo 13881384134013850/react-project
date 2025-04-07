@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Hellow from './hellow';
 import Timer from './timer';
-import TimeList from './TimeList';
+import { timerContext } from './timerContext';
 
 const App = () => {
     const [title, setTitle] = useState('به سایت کدیاد خوش امدید');
     const [isLight, setIsLight] = useState(false);
-    const [timeArr, setTimeArr] = useState(["00 : 05 : 10", "05 : 07 : 13"])
+    const [timeArry, setTimeArry] = useState(["00 : 03 : 14"])
 
     const handleSetIsLight = () => {
         setIsLight(!isLight)
@@ -21,13 +21,19 @@ const App = () => {
     // زمانی که می خواهیم این موارد دوباره از سرگرفته بشه اسم استیت های خود را لیست می کنیم 
 
     return (
-        <div className="main" style={{ backgroundColor: isLight ? 'white' : 'black' }}>
-            <Hellow title={title} />
-            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} />
-            <TimeList>
-                {timeArr}
-            </TimeList>
-        </div>
+        <timerContext.Provider value={{
+            timeArry: timeArry,
+            setTimeArry: setTimeArry,
+            white: "white"
+        }}>
+            <div className="main" style={{ backgroundColor: isLight ? 'white' : 'black' }}>
+                <Hellow title={title} />
+                <Timer
+                    isLight={isLight}
+                    handleSetIsLight={handleSetIsLight}
+                />
+            </div>
+        </timerContext.Provider>
     )
 }
 

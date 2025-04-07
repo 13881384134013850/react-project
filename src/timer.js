@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./style.css"
+import TimeList from './TimeList';
+import { timerContext } from './timerContext';
 
 let intervalTimer;
 
@@ -13,6 +15,8 @@ class Timer extends React.Component {
             seconds: 0
         }
     }
+
+    static contextType = timerContext
 
     startInterval = () => {
         this.stopInterval()
@@ -51,14 +55,23 @@ class Timer extends React.Component {
         })
     }
 
-    render() {
+    handleSaveTime = () => {
         let h = this.state.hours
         let m = this.state.minutes
         let s = this.state.seconds
+        let newTime = `${h > 9 ? h : "0" + h} : ${m > 9 ? m : "0" + m} : ${s > 9 ? s : "0" + s}`
+        this.context.setTimeArry([...this.context.timeArry, newTime])
+    }
 
+    render() {
+        console.log(this)
+        let h = this.state.hours
+        let m = this.state.minutes
+        let s = this.state.seconds
+        console.log(this)
         return (
             <>
-                <h2 className="timer">
+                <h2 className="timer" onClick={this.handleSaveTime} style={{ color: this.context.white }}>
                     {`${h > 9 ? h : "0" + h} : ${m > 9 ? m : "0" + m} : ${s > 9 ? s : "0" + s}`}
                 </h2>
                 <div className='box_btn'>
@@ -76,6 +89,7 @@ class Timer extends React.Component {
                         {this.props.isLight ? 'dark' : 'white'}
                     </button>
                 </div>
+                <TimeList />
             </>
         )
     }

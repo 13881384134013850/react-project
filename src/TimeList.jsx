@@ -1,18 +1,17 @@
+import { useContext } from "react"
 import Item from "./Item"
+import { timerContext } from "./timerContext"
 
 const TimeList = (props) => {
-    console.log(props.children)
+    const context = useContext(timerContext)
+    console.log(context)
     return (
         <div className="main_item_list">
-            {props.children.map((item, index) => ( 
-                <Item key={index}>{item}</Item>
+            {context.timeArry.map(item => (
+                <Item key={Math.random()}>{item}</Item>
             ))}
         </div>
     )
 }
 
-// props.children موادری که بین تگ باز و بسته کامپوننت ما قرار می گیرد
-
-// داخل ری اکتی میگه هر چی که بین یک تگ باز و بسته قرار دادی و ارسال کردی می توانی در چیلدرن دریافت کنی
-
-export default  TimeList
+export default TimeList
